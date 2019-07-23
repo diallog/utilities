@@ -1,0 +1,30 @@
+#!/usr/bin/expect
+
+set timeout 30
+proc abort {} { exit 2 }
+
+spawn nc -C mail.dev.gee-zone.us 25
+expect default abort "220 "
+send "HELO dev.gee-zone.us\r"
+expect default abort "\n250 "
+send "AUTH LOGIN\r"
+expect default abort "\n334 "
+send "YWRtaW5AZGV2LmdlZS16b25lLnVzCg=="
+expect default abort "\n334 "
+send "YWRtaW51c2VyCg=="
+expect default abort "\n235 "
+send "MAIL FROM:admin@dev.gee-zone.us\r"
+expect default abort "\n250 "
+send "RCPT TO:test1@cogs.gee-zone.us\r"
+expect default abort "\n250 "
+send "DATA\r"
+expect default abort "\n354 "
+send "From: admin@dev.gee-zone.us\r"
+send "To: test1@cogs.gee-zone.us\r"
+send "Subject: Test\r"
+send "Date: Thu, 20 Dec 2012 12:00:00 +0000\r"
+send "\r"
+send "Testing\r"
+send ".\r"
+expect default abort "\n250 "
+send "QUIT\r"
