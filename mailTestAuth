@@ -9,15 +9,9 @@ send "HELO dev.gee-zone.us\r"
 expect default abort "\n250 "
 send "AUTH LOGIN\r"
 expect default abort "\n334 "
-<<<<<<< HEAD
-send "YWRtaW5AZGV2LmdlZS16b25lLnVzCg==\r"
+send "ZGlhbGxvZ0BkZXYuZ2VlLXpvbmUudXMK\r"
 expect default abort "\n334 "
-send "YWRtaW51c2VyCg==\r"
-=======
-send "ZGlhbGxvZ0BkZXYuZ2VlLXpvbmUudXMK"
-expect default abort "\n334 "
-send "ZGlhbGxvZ3VzZXIK"
->>>>>>> 5766b98fe288d79c78de5913d65a0d8518eafe9a
+send "ZGlhbGxvZ3VzZXIK\r"
 expect default abort "\n235 "
 send "MAIL FROM:diallog@dev.gee-zone.us\r"
 expect default abort "\n250 "
