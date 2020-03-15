@@ -1,28 +1,25 @@
-#!/usr/bin/expect
+#!/usr/bin/env expect
 
 set timeout 30
 proc abort {} { exit 2 }
 
-spawn nc -C mail.dev.gee-zone.us 25
-expect default abort "220 "
-send "HELO dev.gee-zone.us\r"
+spawn openssl s_client -connect mail.dev.gee-zone.us:587 -starttls smtp -quiet
+expect default abort "250 "
+send "HELO utility.dev.gee-zone.us\r"
 expect default abort "\n250 "
-send "AUTH LOGIN\r"
-expect default abort "\n334 "
-send "ZGlhbGxvZ0BkZXYuZ2VlLXpvbmUudXMK\r"
-expect default abort "\n334 "
-send "ZGlhbGxvZ3VzZXIK\r"
+send "AUTH PLAIN\r"
+expect default abort "\n334"
+send "AGRpYWxsb2dAZGV2LmdlZS16b25lLnVzAHRoaXNpc2F0ZXN0MDAx"
 expect default abort "\n235 "
 send "MAIL FROM:diallog@dev.gee-zone.us\r"
 expect default abort "\n250 "
-send "RCPT TO:postmaster@dev.gee-zone.us\r"
+send "RCPT TO:clannister@got.gee-zone.us\r"
 expect default abort "\n250 "
 send "DATA\r"
 expect default abort "\n354 "
 send "From: diallog@dev.gee-zone.us\r"
-send "To: postmaster@dev.gee-zone.us\r"
+send "To: clannister@got.gee-zone.us\r"
 send "Subject: Test\r"
-send "Date: Thu, 23 Jul 2019 21:05:00 +0000\r"
 send "\r"
 send "Testing\r"
 send ".\r"
