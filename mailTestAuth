@@ -5,7 +5,7 @@ proc abort {} { exit 2 }
 
 spawn openssl s_client -connect mail.dev.gee-zone.us:587 -starttls smtp -quiet
 expect default abort "250 "
-send "HELO utility.dev.gee-zone.us\r"
+send "HELO ionicMBpro\r"
 expect default abort "\n250 "
 send "AUTH PLAIN\r"
 expect default abort "\n334"
@@ -19,7 +19,7 @@ send "DATA\r"
 expect default abort "\n354 "
 send "From: diallog@dev.gee-zone.us\r"
 send "To: clannister@got.gee-zone.us\r"
-send "Subject: Test\r"
+send "Subject: Test 3\r"
 send "\r"
 send "Testing\r"
 send ".\r"
