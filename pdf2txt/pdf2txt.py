@@ -3,7 +3,8 @@
 import pdftotext
 
 # Load your PDF
-with open("lorem_ipsum.pdf", "rb") as f:
+convert_this_file = input('What file would you like to convert? ')
+with open(convert_this_file, "rb") as f:
     pdf = pdftotext.PDF(f)
 
 # How many pages?
